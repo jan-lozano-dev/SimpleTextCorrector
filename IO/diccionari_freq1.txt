@@ -1,0 +1,21 @@
+apple 100
+program 90
+the 500
+quick 10
+taste 5
+brown 5
+fox 20
+python 50
+jumps 15
+over 25
+lazy 8
+dog 15
+color 60
+colour 40
+hello 200
+world 100
+test 30
+are 80
+quack 5
+
+

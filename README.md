@@ -19,13 +19,7 @@ This program processes a text file and automatically corrects spelling mistakes.
 - Generates a log of **all corrections** made.
 
 ## 📁 Project Structure
-├── ParFreq.hpp / .cpp # Represents a (word, frequency) pair
-├── Diccionari.hpp / .cpp # Dictionary with BST storage
-├── Corrector.hpp / .cpp # Spell-checking logic
-├── BST.hpp / .cpp # Binary Search Tree implementation
-├── main.cc # Main program
-├── Makefile # Compilation and testing
-└── README.md # Project documentation
+(-)
 
 
 ## 📥 Input Files

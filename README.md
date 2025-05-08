@@ -19,4 +19,29 @@ This program processes a text file and automatically corrects spelling mistakes.
 - Generates a log of **all corrections** made.
 
 ## 📁 Project Structure
+├── ParFreq.hpp / .cpp # Represents a (word, frequency) pair
+├── Diccionari.hpp / .cpp # Dictionary with BST storage
+├── Corrector.hpp / .cpp # Spell-checking logic
+├── BST.hpp / .cpp # Binary Search Tree implementation
+├── main.cc # Main program
+├── Makefile # Compilation and testing
+└── README.md # Project documentation
+
+
+## 📥 Input Files
+1. **Dictionary file** (`diccionari.txt`):  
+   Format: one word and its frequency per line  
+   Example:
+   hello 100
+   programming 45
+   the 1000
+
+2. **Text file** (`input.txt`):  
+Format: ASCII, lowercase only, with basic punctuation.  
+Example:
+
+
+## 📤 Output Files
+1. **Corrected text file** (`output.txt`):  
+
 

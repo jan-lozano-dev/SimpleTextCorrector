@@ -47,7 +47,11 @@ class BST  {
 		   nodes apuntada per 'node', mantenint
 		   les propietats de BST */
 		Item* insert(Item *node, const T& d);
-		
+
+		/* Pre: ???? */
+		/* Post: ?????*/
+		void ef_find(Item* node, const T& d, Item*& result, bool& found) const;
+
 		/* Pre: Cert */
 		/* Post: El resultat és el node de la jerarquia
 		   de nodes apuntada per 'node', amb el mateix
@@ -97,14 +101,7 @@ class BST  {
 		   implícit amb aquest valor, altrament conté un
 		   element buit */
 		pair<bool, T> find(const T& d) const;
-		// Pre: t és un BST.
-		// Post: Retorna cert si i només si x apareix a t.
-		bool searchInBST(BinaryTree<int> &t, int x){
-		    bool result = false;
-		
-		    ef_searchInBST(t, x, result);
-		    return result;
-		}
+
 	
 };
 

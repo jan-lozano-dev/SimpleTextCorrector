@@ -87,29 +87,7 @@ class BST  {
 		//*********************************************************
 		// Consultors
 		//*********************************************************	
-		// Pre: t és un BST.
-		// Post: Modifica result cert si i només si x apareix a t.
-		void ef_searchInBST(BinaryTree<int> &t, int x, bool &result){
-		    if(!result){
-		        if(!t.isEmpty()){
-		            int root = t.getRoot();
-		            if(x < root){
-		                //Search in left tree.
-		                //FF: nº de nodes per tractar.
-		                //HI: result indica que fins ara no hi ha l'element a trobar.
-		                ef_searchInBST(t.getLeft(),x, result);
-		            } else if(x > root){
-		                //Search in right tree.
-		                //FF: nº de nodes per tractar.
-		                //HI: result indica que fins ara no hi ha l'element a trobar.
-		                ef_searchInBST(t.getRight(),x, result);
-		            } else{
-		                //x == root
-		                result = true;
-		            }
-		        }
-		    }
-		}
+		
 
 		/* Pre: Cert */
 		/* Post: El primer component del resultat indica

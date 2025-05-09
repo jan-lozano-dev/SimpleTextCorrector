@@ -20,11 +20,32 @@ typename BST<T>::Item* BST<T>::insert(Item *node, const T& d)
 }
 //*********************************************************
 template <typename T>
+void BST<T>::ef_find(Item* node, const T& d, Item*& result, bool& found) const {
+	if (!found && node != nullptr) {
+		//Cas base: Arribem a fulla o en crida recursiva anterior es troba d.
+		if (d < node->data) {
+            		//FF: mida del subarbre pel que buscar.
+			//HI: ???
+			ef_find(node->left, d, result, found);
+        } else if (d > node->data) {
+			//FF: mida del subarbre pel que buscar.
+			//HI: ???
+            		ef_find(node->right, d, result, found);
+        } else {
+            		found = true;
+            		result = node;
+        }
+    }
+}
+
+template <typename T>
 typename BST<T>::Item* BST<T>::find(Item *node, const T& d) const 
 {
-	
-	// PROGRAMA AQUEST MÈTODE
-	
+	Item *result = nullptr;
+	bool found;
+	//Crida a funció eficient parametritzada recursiva.
+	ef_find(node, d, result, bool=;
+	return result;	
 }
 
 //*********************************************************

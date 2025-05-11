@@ -42,14 +42,22 @@ class BST  {
 		void clear(Item *node);
 
 		/* Pre: Cert */
+		/* Post: El paràmetre "result" apunta a l'arbre resultat d'inserir "d" al subarbre 
+  		  original amb arrel "node", mantenint les propietats del BST. 
+      		  El booleà "inserted" val true si s'ha realitzat la inserció (no hi ha duplicat). */
+		Item* ef_insert(Item *node, const T& d, Item* &result, bool &inserted);
+		
+		/* Pre: Cert */
 		/* Post: Afegeix un node nou amb el valor
 		   rebut per paràmetre a la jerarquia de
 		   nodes apuntada per 'node', mantenint
 		   les propietats de BST */
 		Item* insert(Item *node, const T& d);
 
-		/* Pre: ???? */
-		/* Post: ?????*/
+		/* Pre: Cert */
+		/* Post: Si existeix node amb root == d en subarbre que "node" apunta, booleà "found" 
+  			 serà true i "result" apuntarà a aquest node. Cas contrari, "found" false i 
+      			 result == nullptr. */
 		void ef_find(Item* node, const T& d, Item*& result, bool& found) const;
 
 		/* Pre: Cert */

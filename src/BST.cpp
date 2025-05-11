@@ -44,7 +44,7 @@ typename BST<T>::Item* BST<T>::find(Item *node, const T& d) const
 	Item *result = nullptr;
 	bool found = false;
 	//Crida a funció eficient parametritzada recursiva.
-	ef_find(node, d, result, bool=;
+	ef_find(node, d, result, bool);
 	return result;	
 }
 

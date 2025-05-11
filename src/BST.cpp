@@ -12,12 +12,53 @@ void BST<T>::clear(Item *node)
 }
 //*********************************************************
 template <typename T>
-typename BST<T>::Item* BST<T>::insert(Item *node, const T& d) 
+typename BST<T>::Item* BST<T>::ef_insert(Item *node, const T& d, Item* &result, bool &inserted) 
 {
-	
-	// PROGRAMA AQUEST MÈTODE
-	
+	if(!inserted){
+		if(node == nullptr){
+			//En BST, s'inserta en fulles. Insertem.
+			node = new Item{d, nullptr, nullptr};
+			result = node;
+			inserted = true;
+			
+		} else if(d < node->data){
+			//Element a inserir més petit que el node actual. Anem a l'esquerra.
+			Item* tmp = node->left;
+			//FF: mida subarbre amb arrel "tmp" on s'inserirà "d".
+			//HI: Suposem que la posició on em d'inserir "d" es troba dins del subarbre esquerre 
+			//    que prèn per root "tmp".
+			ef_insert(tmp, d, tmp, inserted);
+			node->left = tmp;
+			result = node;
+		} else if(d > node->data){
+			//Element a inserir més gran que el node actual. Anem a la dreta.
+			Item* tmp = node->right;
+			//FF: mida subarbre amb arrel "tmp" on s'inserirà "d".
+			//HI: Suposem que la posició on em d'inserir "d" es troba dins del subarbre dret 
+			//    que prèn per root "tmp".
+			ef_insert(tmp, d, tmp, inserted);
+			node->right = tmp;
+			result = node;
+		} else{
+			//No podem insertar un duplicat.
+			result = node;
+			inserted = true;
+		}		
+	}
 }
+
+
+template <typename T>
+typename BST<T>::Item* BST<T>::insert(Item *node, const T& d) const 
+{
+	Item *result = node;
+	bool inserted = false;
+	//Crida a funció eficient parametritzada recursiva.
+	ef_insert(node, d, result, inserted);
+	return result;	
+}
+
+
 //*********************************************************
 template <typename T>
 void BST<T>::ef_find(Item* node, const T& d, Item*& result, bool& found) const {

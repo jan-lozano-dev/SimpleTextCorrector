@@ -16,20 +16,26 @@ class ParFreq {
 	   //*********************************************************
 	   // Constructors
 	   //*********************************************************
-	   
+	   /*Pre: Cert*/
+	   /*Post: El resultat és un ParFreq sense cap element.*/
+	   ParFreq();
 	   //...
-	   
+
+	   /*CAL MÉS CONSTRUCTORS'?????*/
+
+
 	   //*********************************************************
 	   // Destructor
 	   //*********************************************************
-	   
-	   //...
+	   /*Esborra automàticament els objectes locals en sortir d'un `àmbit de
+    	     visibilitat.*/	   
+           ~ParFreq();
 	 
    	   //*********************************************************
 	   // Modificadors
 	   //*********************************************************
 	   
-	   //...
+	   // ???
 	   
 	   //*********************************************************
 	   // Consultors
@@ -54,6 +60,10 @@ class ParFreq {
 	private:
 		// IMPLEMENTACIÓ DE LA CLASSE ParFreq 
 		// (definició del nom i tipus de cada atribut)
-
+		struct item {
+			string paraula;
+			int freq;
+		};
+	/*MÈTODES PRIVATS!*/
 };
 #endif

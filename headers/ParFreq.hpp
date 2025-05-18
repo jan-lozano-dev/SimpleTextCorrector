@@ -6,14 +6,13 @@ using namespace std;
 
 class ParFreq {
 // Tipus de mòdul: dades
-// Descripció del tipus: Representa una paraula amb la seva freqüència
-//						d'aparició en un corpus gran. 
-	   
+// Descripció del tipus: Representa una paraula amb la seva freqüència d'aparició en un corpus gran. 
 	   
 	private:
-		// IMPLEMENTACIÓ DE LA CLASSE ParFreq 
-		// (definició del nom i tipus de cada atribut)
 		pair<string, int> dades;
+		//El string es la paraula insertada. Ex: "Apple"
+		//El int es la freqüència donada al input juntament amb el string. Ex: "100"
+		//INPUT EXEMPLE: Apple 100
 
 	public:	
 		//*********************************************************
@@ -22,6 +21,7 @@ class ParFreq {
 	  	/*Pre: Cert*/
 	  	/*Post: El resultat és un ParFreq sense cap element.*/
 	  	ParFreq();
+
 		/* Pre: Cert */
     		/* Post: el paràmetre implícit és una copia profunda de la ParFreq donada com a paràmetre. */	
 		ParFreq(const ParFreq<T> &pf);
@@ -51,7 +51,9 @@ class ParFreq {
 		//*********************************************************
 		// Consultors
 		//*********************************************************
-		
+		/* Pre: Cert */
+		/* Post: El resultat és el pair del paràmetre implícit */
+		pair<string, int> getPair() const;
 		/* Pre: Cert */
 		/* Post: El resultat és la paraula del paràmetre implícit */
 		string getParaula() const;
@@ -64,8 +66,6 @@ class ParFreq {
 		/* Post: El resultat indica si la paraula del paràmetre implícit
 		és igual a la paraula del parell rebut per paràmetre */ 	   
 		bool operator==(const ParFreq pf) const;
-		
-		//...
 
 };
 #endif

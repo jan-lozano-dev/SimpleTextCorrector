@@ -24,7 +24,7 @@ class ParFreq {
 
 		/* Pre: Cert */
     		/* Post: el paràmetre implícit és una copia profunda de la ParFreq donada com a paràmetre. */	
-		ParFreq(const ParFreq<T> &pf);
+		ParFreq(const ParFreq &pf);
 		
 		/* Pre: Cert */
 		/* Post: El paràmetre implícit és una ParFreq amb s com a paraula i amb n com freqüència. */
@@ -65,7 +65,7 @@ class ParFreq {
 		/* Pre:  Cert  */
 		/* Post: El resultat indica si la paraula del paràmetre implícit
 		és igual a la paraula del parell rebut per paràmetre */ 	   
-		bool operator==(const ParFreq pf) const;
+		bool operator==(const ParFreq& pf) const;
 
 };
 #endif

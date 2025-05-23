@@ -43,7 +43,7 @@ class Diccionari {
 		apareixia ja al diccionari, s'ha afegit al diccionari el
 		parell rebut per paràmetre; altrament, el diccionari no 
 		s'ha modificat */
-		void crear_BTS(const vector<ParFreq> &v); // inserció en el BST 
+		void omplir_BTS(const vector<ParFreq> &v); // inserció en el BST 
 
 	   /* Pre: Cert */
 	   /* Post: Si la paraula del parell rebut per  paràmetre no 

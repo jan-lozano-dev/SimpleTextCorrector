@@ -78,9 +78,6 @@ int getFrequencia(const string &paraula) const {
     int res;
     //com extreure Freq si només busques paraula
     arbreOrd.find(paraula);
-    if (trobada == true){
-        dw
-    }
     return (vd[i]).getFrequencia();
 
 }

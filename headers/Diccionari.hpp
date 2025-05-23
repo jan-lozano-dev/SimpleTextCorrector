@@ -59,7 +59,8 @@ class Diccionari {
 	   
 	   // Pre: Cert
 	   // Post: retorna el vector 'vd' de ParFreq's del Diccionari 
-	   vector<ParFreq> getVector();
+	   vector<ParFreq> getVector() const;
+	
 
 	   /* Pre:  Cert  */
 	   /* Post: El resultat indica si el diccionari conté la
@@ -89,7 +90,7 @@ class Diccionari {
 	  
 	private:
 	vector <ParFreq> vd;
-	BST <ParFreq> arbreOrd;
+	BST <ParFreq> arbre_ord;
 		// IMPLEMENTACIÓ DE LA CLASSE Diccionari 
 		// (definició del nom i tipus de cada atribut)
 		// (poden definir-se mètodes privats que actuïn com a funcions auxiliars)

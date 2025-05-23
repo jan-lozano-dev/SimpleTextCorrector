@@ -38,12 +38,14 @@ apareixia ja al diccionari, s'ha afegit al diccionari el
 parell rebut per paràmetre; altrament, el diccionari no 
 s'ha modificat */
 void omplir_BTS(const vector<ParFreq> &v) { // inserció en el BST 
-    sort(vd.begin(), vd.end(), ordenarVector);// Ordenar el vector vd alfabèticament pel camp 'nom'
+    sort(vd.begin(), vd.end(), ordenarVector);// Ordenar el vector vd alfabèticament
+    // traslladem el vector ordenat a el BTS arbre_ord
     unsigned int i = (vd.size()/2);
-    arbreOrd.insert(vd[i]);
+    arbre_ord.insert(vd[i]);
     //ara hauriem de crear dos vectors, un de l'esquerra i un de la dreta
     while (i > 1) {
         //fer bucle fins que hi hagi només una paraula
+        //DUBTE: QUIN ÉS L'EQUIVALENT DEL getLeft() o getRight() EN EL BTS
     }
 }    
 
@@ -55,7 +57,7 @@ void omplir_BTS(const vector<ParFreq> &v) { // inserció en el BST
 
 // Pre: Cert
 // Post: retorna el vector 'vd' de ParFreq's del Diccionari 
-vector<ParFreq> getVector() {
+vector<ParFreq> Diccionari::getVector() const{
     return vd;
 }
 
@@ -63,8 +65,9 @@ vector<ParFreq> getVector() {
 /* Post: El resultat indica si el diccionari conté la
 paraula rebuda per paràmetre */	   
 bool conte(const string &paraula) const{  // cerca en el BST
-    //S`HA DE FER CERCA AL BST NO AL VECTOR
-    return arbreOrd.find(paraula).first;
+    //DUBTE: EN LA FUNCIÓ FIND DEL BTS, ES POT PASSAR UN STRING PERQ HO BUSQUI TOT I QUE SON PARFREQ'S? ÉS A DIR, BUSCARAN 
+    //       LA PARAULA DE CADA PARFREQ?
+    return arbre_ord.find(paraula);
     
 } 
 
@@ -76,10 +79,17 @@ diccionari de la paraula rebuda per paràmetre */
 int getFrequencia(const string &paraula) const {
     bool trobada = false;
     int res;
-    //com extreure Freq si només busques paraula
-    arbreOrd.find(paraula);
-    return (vd[i]).getFrequencia();
+    trobada = arbre_ord.find(paraula); 
+    //DUBTE: EN LA FUNCIÓ FIND DEL BTS, ES POT PASSAR UN STRING PERQ HO BUSQUI TOT I QUE SON PARFREQ'S? ÉS A DIR, BUSCARAN 
+    //       LA PARAULA DE CADA PARFREQ?
+    if (trobada == true){
+        dw
+    }
+    //DUBTE: QUAN TROBI LA PARAULA COM A TAL, QUE HEM FA RECONÈIXER QUIN PARFREQ ÉS?, ÉS A DIR, QUIN ATRIBUT PUC 
+    //       ESCOLLIR PER AGAFAR LA FREQÜÈNCIA? ES POT FER AMB LO DE UN PAIR DE .FIRST() / .SECOND() ?
+    //(vd[i]).getFrequencia();
 
+    return 
 }
 
 

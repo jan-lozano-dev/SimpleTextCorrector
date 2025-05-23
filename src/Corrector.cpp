@@ -12,9 +12,10 @@ les entrades del fitxer i omple el diccionari del corrector
 que crea; altrament, mostra un missatge d'error */
 Corrector(const string &rutaDiccionari) { // carrega el diccionari (BST)
 	Diccionari Dicc;
-	Dicc.llegeixDeFitxer(&rutaDiccionari);
-	v = Dicc.getVector();
-	Dicc.omplir_BTS(v);
+	Dicc.llegeixDeFitxer(&rutaDiccionari); //s'ompla el vector vd en la classe Diccionari
+	v = Dicc.getVector(); //s'accedeix al vector vd
+	Dicc.omplir_BTS(v); //s'ordena el vector alfabeticament i s'implementa en el BTS
+
 }
 
 

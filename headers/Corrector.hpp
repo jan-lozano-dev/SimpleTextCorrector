@@ -58,7 +58,6 @@ class Corrector {
 		
 
 	private:
-		vector <ParFreq> vd;
 		// IMPLEMENTACIÓ DE LA CLASSE Corrector 
 		// (definició del nom i tipus de cada atribut)
 		// (poden definir-se mètodes privats que actuïn com a funcions auxiliars)

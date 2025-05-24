@@ -37,7 +37,7 @@ en sortir d'un àmbit de visibilitat */
 apareixia ja al diccionari, s'ha afegit al diccionari el
 parell rebut per paràmetre; altrament, el diccionari no 
 s'ha modificat */
-void omplir_BTS(const vector<ParFreq> &v) { // inserció en el BST 
+void omplir_BST(const vector<ParFreq> &v) { // inserció en el BST 
     sort(vd.begin(), vd.end(), ordenarVector);// Ordenar el vector vd alfabèticament
     // traslladem el vector ordenat a el BTS arbre_ord
     unsigned int i = (vd.size()/2);

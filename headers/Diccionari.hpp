@@ -89,7 +89,7 @@ class Diccionari {
 	   void llegeixDeFitxer(const string &path);
 	  
 	private:
-	vector <ParFreq> vd;
+	vector <ParFreq> v_aux; // és el vector auxiliar en què hi van els ParFreqs recent llegits pel fitxer dicc.txt
 	BST <ParFreq> arbre_ord;
 		// IMPLEMENTACIÓ DE LA CLASSE Diccionari 
 		// (definició del nom i tipus de cada atribut)

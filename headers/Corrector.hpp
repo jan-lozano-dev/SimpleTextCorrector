@@ -62,18 +62,22 @@ class Corrector {
 		void bolcaRegistre(const string &rutaLog);
 
 	private:
-		Diccionari Diccionari;	
+		Diccionari Dicc;	
 		
 		//MÈTODES PRIVATS
+
 		/*Pre: Cert*/
-		/*Post: Corregeix paraula insertant lletres a 's' que es creu que "falten" 
-				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void insereix(const string &s, queue<string> &cua_aux);
+		/*Post1: Es creen paraules inserint lletres a cada posició de 'paraula' pasada per paràmetre i si són dins del BST es guarden 
+		dins de la cua 'candidates'*/
+		/*Pos2t: Corregeix paraula insertant lletres a 's' que es creu que "falten" 
+		donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
+		void insercio(const string &paraula, queue<string> &candidates);
 
 		/*Pre: Cert*/
 		/*Post: Corregeix paraula eliminant lletres a 's' que es creu que "sobren" 
-				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void elimina(const string &s, queue<string> &cua_aux);
+		donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
+		void esborrat(const string &paraula, queue<string>&candidates);
+
 
 		/*Pre: Cert*/
 		/*Post: Corregeix paraula substituint lletres a 's' que es creu que "son incorrectes" 

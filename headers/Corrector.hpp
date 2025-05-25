@@ -2,6 +2,7 @@
 #define CORRECTOR_HPP
 #include "Diccionari.hpp"
 #include "ParFreq.hpp"
+#include "Diccionari.hpp"
 #include <algorithm>
 #include <vector>
 using namespace std;
@@ -42,26 +43,47 @@ class Corrector {
 		 que hagi fet; altrament, mostra un missatge d'error */		
 		void processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog);
 		
-		//...
-	   
-		//...
+		/*Pre: Cert*/
+		/*Post: RELLENAR*/
+		bool elimina_signes(string &s, string &signe);
+		
+		/*Pre: Cert*/
+		/*Post: RELLENAR*/
+		string correcio(const string &s);
 		
 		//*********************************************************
 		//Lectura i escriptura
-		//*********************************************************		
+		//*********************************************************		w
 
 		/* Pre: Cert */
 		/* Post: S'han escrit al fitxer associat a rutaLog totes 
 		 les correccions fetes al text d'entrada sent el format de
 		 cada línia paraula_original -> paraula_corregida */
 		void bolcaRegistre(const string &rutaLog);
-		
 
 	private:
-		// IMPLEMENTACIÓ DE LA CLASSE Corrector 
-		// (definició del nom i tipus de cada atribut)
-		// (poden definir-se mètodes privats que actuïn com a funcions auxiliars)
+		Diccionari Diccionari;	
 		
+		//MÈTODES PRIVATS
+		/*Pre: Cert*/
+		/*Post: Corregeix paraula insertant lletres a 's' que es creu que "falten" 
+				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
+		void insereix(const string &s, queue<string> &cua_aux);
+
+		/*Pre: Cert*/
+		/*Post: Corregeix paraula eliminant lletres a 's' que es creu que "sobren" 
+				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
+		void elimina(const string &s, queue<string> &cua_aux);
+
+		/*Pre: Cert*/
+		/*Post: Corregeix paraula substituint lletres a 's' que es creu que "son incorrectes" 
+				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
+		void substitueix(const string &s, queue<string> &cua_aux);
+
+		/*Pre: Cert*/
+		/*Post: Corregeix paraula transposant lletres a 's' que es creu que "movent-les una posició seràn correctes" 
+				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
+		void transposa(const string &s, queue<string> &cua_aux);
 
 };
 

@@ -83,7 +83,7 @@ int getFrequencia(const string &paraula) const {
     pair res = arbre_ord.find(pfcerca); 
 
 
-    return res.second // Ens han dit que la paraula ja és en el diccionari, no fa falta comprobar si ho està
+    return res.second.getFrequencia() // Ens han dit que la paraula ja és en el diccionari, no fa falta comprobar si ho està
 }
 
 

@@ -34,6 +34,12 @@ class Diccionari {
 		~Diccionari();
 
 	   //...
+
+	   /* Pre: Cert */
+	   /* Post: Si les paraules dels parells que es troben en el vector rebut per paràmetre no
+	   apareixien ja al diccionari, s'han afegit al diccionari els parells rebuts en el vector per
+	   paràmetre; altrament, el diccionari no s'ha modificat */
+	   void ef_omplir_BST(vector<ParFreq> &v, int pos_i, int pos_f);
 	 
    	   //*********************************************************
 	   // Modificadors
@@ -43,7 +49,7 @@ class Diccionari {
 		apareixia ja al diccionari, s'ha afegit al diccionari el
 		parell rebut per paràmetre; altrament, el diccionari no 
 		s'ha modificat */
-		void omplir_BTS(const vector<ParFreq> &v); // inserció en el BST 
+		void omplir_BST(const vector<ParFreq> &v); // inserció en el BST 
 
 	   /* Pre: Cert */
 	   /* Post: Si la paraula del parell rebut per  paràmetre no 

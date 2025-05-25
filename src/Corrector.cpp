@@ -6,20 +6,10 @@ using namespace std;
 les entrades del fitxer i omple el diccionari del corrector
 que crea; altrament, mostra un missatge d'error */
 Corrector::Corrector(const string &rutaDiccionari) { // carrega el diccionari (BST)
-	ifstream input_dic(rutaDiccionari);
-	if(!input_dic.is_open()){
-		throw runtime_error("ERROR. No es pot obrir l'archiu: " + rutaDiccionari);
-	} else{
-		string s;
-		vector<ParFreq> v;
-		while(getline(input_dic, s)){
-			stringstream ss(s);
-			ParFreq pf;
-			ss >> pf.first() >> pf.second;
-			v.push_back(pf)
-		}
-		dic.omplirBST(v, 0, v.size());
-	}
+	Diccionari Dicc;
+	Dicc.llegeixDeFitxer(&rutaDiccionari); //s'ompla el vector vd en la classe Diccionari
+	Dicc.omplir_BST(); //s'ordena el vector alfabeticament i s'implementa en el BTS
+
 }
 
 

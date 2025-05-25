@@ -5,9 +5,7 @@ using namespace std;
 // IMPLEMENTACIÓ DE LA CLASSE Diccionari
 // (implementació de tots els mètodes especificats en el fitxer Diccionari.hpp)
 
-bool ordenarVector(const ParFreq& a, const ParFreq& b) {
-    return a.getParaula() < b.getParaula(); 
-}
+
 
 //*********************************************************
 // Constructors
@@ -28,6 +26,32 @@ en sortir d'un àmbit de visibilitat */
 
 // ...
 
+/* Pre: Cert */
+/* Post: Si les paraules dels parells que es troben en el vector rebut per paràmetre no
+apareixien ja al diccionari, s'han afegit al diccionari els parells rebuts en el vector per
+paràmetre; altrament, el diccionari no s'ha modificat */
+void Diccionari::ef_omplir_BST(vector<ParFreq> &v, int pos_i, int pos_f){
+    
+    int meitat = pos_i + (pos_f - pos_i)/2; //posició situada a la meitat del vector
+    ParFreq pf_ins = v[meitat];
+    arbre_ord.insert(pf_ins); //la funció insert comprovarà que no hi ha cap altre ParFreq igual a pf_ins dins del BST
+
+    if (pos_f - pos_i > 1){
+        ef_omplir_BST(v_aux, pos_i, meitat);
+        /* HI: Si les paraules dels parells que es troben en el vector des de l'inici fins la meitat
+        apareixien ja al diccionari, s'han afegit al diccionari els parells rebuts en el vector 
+        per paràmetre; altrament, el diccionari no s'ha modificat. */
+        /* Fita: la mida del vector que comprèn del ini fins al mig. */
+
+        ef_omplir_BST(v_aux, meitat, pos_f);
+        /* HI: Si les paraules dels parells que es troben en el vector des de la meitat fins al final
+        apareixien ja al diccionari, s'han afegit al diccionari els parells rebuts en el vector 
+        per paràmetre; altrament, el diccionari no s'ha modificat. */
+        /* Fita: la mida del vector que comprèn del mig fins al fin. */
+    }
+}
+
+
 
 //*********************************************************
 // Modificadors
@@ -37,18 +61,17 @@ en sortir d'un àmbit de visibilitat */
 apareixia ja al diccionari, s'ha afegit al diccionari el
 parell rebut per paràmetre; altrament, el diccionari no 
 s'ha modificat */
-void omplir_BTS() { // inserció en el BST 
-    sort(v_aux.begin(), v_aux.end(), ordenarVector);// Ordenar el vector vd alfabèticament
+void Diccionari::omplir_BST() { // inserció en el BST 
+    sort(v_aux.begin(), v_aux.end(), a.getParaula() < b.getParaula()); // Ordenar el vector vd alfabèticament
+    //bool ordenarVector(const ParFreq& a, const ParFreq& b) {
+    //return a.getParaula() < b.getParaula();}
     // traslladem el vector ordenat a el BTS arbre_ord
-    unsigned int i = (v_aux.size()/2);
-    arbre_ord.insert(vd[i]);
-    //ara hauriem de crear dos vectors, un de l'esquerra i un de la dreta
-    
-    while (i > 1) {
+    int posi_f = v.size()-1; //posició final del vector
+    int posi_i = 0;          //posició inicial del vector
 
-        //fer bucle fins que hi hagi només una paraula
+    ef_omplir_BST(v_aux, posi_i, posi_f);
     }
-}    
+    
 
 // ...
 
@@ -65,7 +88,7 @@ vector<ParFreq> Diccionari::getVector() const{
 /* Pre:  Cert  */
 /* Post: El resultat indica si el diccionari conté la
 paraula rebuda per paràmetre */	   
-bool conte(const string &paraula) const{  // cerca en el BST
+bool Diccionari::conte(const string &paraula) const{  // cerca en el BST
     //DUBTE: EN LA FUNCIÓ FIND DEL BTS, ES POT PASSAR UN STRING PERQ HO BUSQUI TOT I QUE SON PARFREQ'S? ÉS A DIR, BUSCARAN 
     //       LA PARAULA DE CADA PARFREQ?
     ParFreq pfcerca(paraula, 0); // La Freqüència no ens importa, posem 0
@@ -78,7 +101,7 @@ bool conte(const string &paraula) const{  // cerca en el BST
 diccionari */
 /* Post: El resultat és la freqüència que apareix al
 diccionari de la paraula rebuda per paràmetre */	 
-int getFrequencia(const string &paraula) const {
+int Diccionari::getFrequencia(const string &paraula) const {
     ParFreq pfcerca(paraula, 0);
     pair res = arbre_ord.find(pfcerca); 
 

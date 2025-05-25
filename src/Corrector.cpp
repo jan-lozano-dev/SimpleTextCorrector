@@ -20,11 +20,13 @@ Corrector::Corrector(const string &rutaDiccionari) { // carrega el diccionari (B
 /*Pre: Cert*/
 /*Post: Es creen paraules inserint lletres a cada posició de 'paraula' pasada per paràmetre i si són dins del BST es guarden 
 dins de la cua 'candidates'*/
+/*Pos2t: Corregeix paraula insertant lletres a 's' que es creu que "falten" 
+donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
 void Corrector::insercio(const string &paraula, queue<string> &candidates) {
     
-	string s_prova;
+    string s_prova;
     string tot = "abcdefghijklmnopqrstuvwxyz";
-	bool trobada = false;
+    bool trobada = false;
 
     for (unsigned int i = 0; i < paraula.size()+1; ++i){
         //INV: Es generen noves paraules en la posició 'i' de 'paraula'.
@@ -44,11 +46,16 @@ void Corrector::insercio(const string &paraula, queue<string> &candidates) {
     }
 }
 
+
+		/*Pre: Cert*/
+		/*Post: Corregeix paraula eliminant lletres a 's' que es creu que "sobren" 
+		donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
+
 /*Pre: Cert*/
-/*Post: corregeix la paraula eliminant lletres que sobren segons la paraula sugerida per freq*/
+/*Post: Corregeix paraula eliminant lletres a 's' que es creu que "sobren" 
+donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
 void Corrector::esborrat(const string &paraula, queue<string>&candidates) {
-    
-	string s_prova;
+    string s_prova;
 
     for (unsigned int i = 0; i < paraula.size(); ++i) {
         /*INV: s'elimina el caràcter en la posició 'i' de 'paraula' i si la nova creació és dins del BST s'insereix en la 

@@ -12,7 +12,7 @@ using namespace std;
 //*********************************************************
 /* Pre: Cert */
 /* Post: El resultat és un Diccionari sense cap ParFeq */	
-Diccionari() {
+Diccionari::Diccionari() {
 }
 
  
@@ -21,7 +21,7 @@ Diccionari() {
 //*********************************************************
 /* Esborra automàticament els objectes locals
 en sortir d'un àmbit de visibilitat */
-~Diccionari() {
+Diccionari::~Diccionari() {
 }
 
 // ...

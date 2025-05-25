@@ -1,21 +1,25 @@
 #include "Corrector.hpp"
 using namespace std;
 
-// IMPLEMENTACIÓ DE LA CLASSE Corrector
-// (implementació de tots els mètodes especificats en el fitxer Corrector.hpp)
-
-
-// ...
 /* Pre: Cert */
 /* Post: Si rutaDiccionari està associat a un fitxer, llegeix
 les entrades del fitxer i omple el diccionari del corrector
 que crea; altrament, mostra un missatge d'error */
-Corrector(const string &rutaDiccionari) { // carrega el diccionari (BST)
-	Diccionari Dicc;
-	Dicc.llegeixDeFitxer(&rutaDiccionari); //s'ompla el vector vd en la classe Diccionari
-	v = Dicc.getVector(); //s'accedeix al vector vd
-	Dicc.omplir_BTS(v); //s'ordena el vector alfabeticament i s'implementa en el BTS
-
+Corrector::Corrector(const string &rutaDiccionari) { // carrega el diccionari (BST)
+	ifstream input_dic(rutaDiccionari);
+	if(!input_dic.is_open()){
+		throw runtime_error("ERROR. No es pot obrir l'archiu: " + rutaDiccionari);
+	} else{
+		string s;
+		vector<ParFreq> v;
+		while(getline(input_dic, s)){
+			stringstream ss(s);
+			ParFreq pf;
+			ss >> pf.first() >> pf.second;
+			v.push_back(pf)
+		}
+		dic.omplirBST(v, 0, v.size());
+	}
 }
 
 
@@ -26,7 +30,7 @@ Corrector(const string &rutaDiccionari) { // carrega el diccionari (BST)
  rutaOutput i escriu al fitxer associat a rutaLog els canvis
  que hagi fet; altrament, mostra un missatge d'error */		
 void processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog) {
-	jhj
+	
 }
 		
 // ...

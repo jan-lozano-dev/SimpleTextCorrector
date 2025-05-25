@@ -37,15 +37,16 @@ en sortir d'un àmbit de visibilitat */
 apareixia ja al diccionari, s'ha afegit al diccionari el
 parell rebut per paràmetre; altrament, el diccionari no 
 s'ha modificat */
-void omplir_BST(const vector<ParFreq> &v) { // inserció en el BST 
-    sort(vd.begin(), vd.end(), ordenarVector);// Ordenar el vector vd alfabèticament
+void omplir_BTS() { // inserció en el BST 
+    sort(v_aux.begin(), v_aux.end(), ordenarVector);// Ordenar el vector vd alfabèticament
     // traslladem el vector ordenat a el BTS arbre_ord
-    unsigned int i = (vd.size()/2);
+    unsigned int i = (v_aux.size()/2);
     arbre_ord.insert(vd[i]);
     //ara hauriem de crear dos vectors, un de l'esquerra i un de la dreta
+    
     while (i > 1) {
+
         //fer bucle fins que hi hagi només una paraula
-        //DUBTE: QUIN ÉS L'EQUIVALENT DEL getLeft() o getRight() EN EL BTS
     }
 }    
 
@@ -58,7 +59,7 @@ void omplir_BST(const vector<ParFreq> &v) { // inserció en el BST
 // Pre: Cert
 // Post: retorna el vector 'vd' de ParFreq's del Diccionari 
 vector<ParFreq> Diccionari::getVector() const{
-    return vd;
+    return v_aux;
 }
 
 /* Pre:  Cert  */
@@ -67,7 +68,8 @@ paraula rebuda per paràmetre */
 bool conte(const string &paraula) const{  // cerca en el BST
     //DUBTE: EN LA FUNCIÓ FIND DEL BTS, ES POT PASSAR UN STRING PERQ HO BUSQUI TOT I QUE SON PARFREQ'S? ÉS A DIR, BUSCARAN 
     //       LA PARAULA DE CADA PARFREQ?
-    return arbre_ord.find(paraula);
+    ParFreq pfcerca(paraula, 0); // La Freqüència no ens importa, posem 0
+    return arbre_ord.find(pfcerca).first;
     
 } 
 
@@ -77,19 +79,11 @@ diccionari */
 /* Post: El resultat és la freqüència que apareix al
 diccionari de la paraula rebuda per paràmetre */	 
 int getFrequencia(const string &paraula) const {
-    bool trobada = false;
-    int res;
-    trobada = arbre_ord.find(paraula); 
-    //DUBTE: EN LA FUNCIÓ FIND DEL BTS, ES POT PASSAR UN STRING PERQ HO BUSQUI TOT I QUE SON PARFREQ'S? ÉS A DIR, BUSCARAN 
-    //       LA PARAULA DE CADA PARFREQ?
-    if (trobada == true){
-        dw
-    }
-    //DUBTE: QUAN TROBI LA PARAULA COM A TAL, QUE HEM FA RECONÈIXER QUIN PARFREQ ÉS?, ÉS A DIR, QUIN ATRIBUT PUC 
-    //       ESCOLLIR PER AGAFAR LA FREQÜÈNCIA? ES POT FER AMB LO DE UN PAIR DE .FIRST() / .SECOND() ?
-    //(vd[i]).getFrequencia();
+    ParFreq pfcerca(paraula, 0);
+    pair res = arbre_ord.find(pfcerca); 
 
-    return 
+
+    return res.second // Ens han dit que la paraula ja és en el diccionari, no fa falta comprobar si ho està
 }
 
 
@@ -110,11 +104,11 @@ void Diccionari::llegeixDeFitxer(const string &path)
     }
 
     string paraula;
-    int frequencia;
+	int frequencia;
     while (fitxer >> paraula >> frequencia) {  // llegeix un parell (paraula, freq) 
 											   // per línia
-	ParFreq pf(paraula, frequencia);
-        vd.push_back(pf);       // suposa que el diccionari té definida l'operació insert
+		ParFreq pf(paraula, frequencia);
+        v_aux.push_back(pf);       // suposa que el diccionari té definida l'operació insert
     }
 }
 

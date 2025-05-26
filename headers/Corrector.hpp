@@ -43,7 +43,7 @@ class Corrector {
 		//*Pre: Cert*/
 		/*Post: Si hi ha algun d'aquests signes ". , ! ? ; ” retorna un pair on el primer terme és un bool true i el segon
 		  element és el signe que s'ha eliminat, altrament el primer element és un false i el segon un string buit */
-		pair<bool, string> elimina_signes(string s);
+		pair<bool, string> elimina_signes(string &s);
 
 		/* Pre: Cert */
 		/* Post: Si rutaInput està associat a un fitxer, llegeix el

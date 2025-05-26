@@ -54,7 +54,7 @@ class Corrector {
 				
 		/*Pre: Cert*/
 		/*Post: RELLENAR*/
-		string correcio(const string &s);
+		string prioritzacio(queue<string> &candidates_f);
 		
 		//*********************************************************
 		//Lectura i escriptura

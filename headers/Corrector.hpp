@@ -42,7 +42,7 @@ class Corrector {
 		//Mètode auxiliar per funció processaText.
 		/*Pre: Cert*/
 		/*Post: RELLENAR*/
-		bool elimina_signes(string &word, string &signe);
+		pair<bool, string> elimina_signes(string s);
 
 		/* Pre: Cert */
 		/* Post: Si rutaInput està associat a un fitxer, llegeix el

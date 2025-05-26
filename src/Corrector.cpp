@@ -73,16 +73,16 @@ void Corrector::bolcaRegistre(const string &rutaLog)
 //*********************************************************
 
 //MÈTODES PRIVATS
-void Corrector::insercio(const string &paraula, queue<string> &candidates) {
+void Corrector::insercio(const string &s, queue<string> &candidates) {
     string s_prova;
     string tot = "abcdefghijklmnopqrstuvwxyz";
     bool trobada = false;
-    for (unsigned int i = 0; i < paraula.size()+1; ++i){
+    for (unsigned int i = 0; i < s.size()+1; ++i){
         //INV: Es generen noves paraules en la posició 'i' de 'paraula'.
         for (unsigned int j = 0; j < tot.size(); ++j) {
             //INV: Es genere una nova paraula per cada lletra mínuscula de l'abecedari (per tot[j]) en la posició 'i' de 'paraula'
 	    //	   i si es troba en el BST es guarda en la cua 'candidates'.
-            s_prova = paraula; //igualem per evitar modificacions anteiors
+            s_prova = s; //igualem per evitar modificacions anteiors
             s_prova.insert(i, 1, tot[j]); // '.insert' és una funció implementada amb la llibreria string que insereix a la
 		// posició 'i' de 's_prova' 1 vegada el caràcter equivalent a 'tot[j]'
 			trobada = Dicc.conte(s_prova);							  
@@ -92,36 +92,36 @@ void Corrector::insercio(const string &paraula, queue<string> &candidates) {
 }
 
 
-void Corrector::esborrat(const string &paraula, queue<string>&candidates) {
+void Corrector::esborrat(const string &s, queue<string>&candidates) {
 	string s_prova;
-	unsigned int n = paraula.size();
+	unsigned int n = s.size();
 	for (unsigned int i = 0; i < n; ++i) {
 		/*INV: s'elimina  caràcter posició 'i' de 'paraula' i si nova creació dins BST, s'insereix en cua 'candidates'*/
-        	s_prova = paraula;
+        	s_prova = s;
         	s_prova.erase(i, 1); 
         	if (!s_prova.empty() and Dicc.conte(s_prova)) candidates.push(s_prova);
     }
 }
 
-void Corrector::substitueix(const string &word, queue<string> &pos){
+void Corrector::substitueix(const string &s, queue<string> &candidates){
 	string aux;
 	string abecedari = "abcdefghijklmnopqrstuvwxyz";
-	unsigned int n = word.length();
+	unsigned int n = s.length();
 	for(unsigned int i = 0; i < n; ++i){
 		//Inv:
 		aux[i] = abecedari[j];
-		if(Dic.conte(aux)) pos.push(aux);
+		if(Dic.conte(aux)) candidates.push(aux);
 	}
 }
 
-void Corrector::transposa(const string &word, queue<string> &pos){
+void Corrector::transposa(const string &s, queue<string> &candidates){
 	string aux;
-	unsigned int n = word.size() - 1;
+	unsigned int n = s.size() - 1;
 	for(unsigned int i = 0; i < n; ++i){
 		//Inv: 
 		aux = paraula;
 		swap(aux[i], aux[i + 1]);
-		if(dic.conte(aux)) pos.push(aux);
+		if(dic.conte(aux)) candidates.push(aux);
 	}
 }
 

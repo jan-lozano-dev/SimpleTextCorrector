@@ -77,7 +77,39 @@ void Corrector::esborrat(const string &paraula, queue<string>&candidates) {
  rutaOutput i escriu al fitxer associat a rutaLog els canvis
  que hagi fet; altrament, mostra un missatge d'error */		
 void Corrector::processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog) {
-	
+	ifstream input_file(rutaInput);
+	if(!input_file.is_open()){
+		throw runtime_error("ERROR. No es pot obrir el fitxer: " + rutaInput);
+	} else{
+		ofstream output_file(rutaLog);
+		if(!output_file.is_open()){
+			cerr << "ERROR. No es pot obrir fitxer output." << endl;
+		} else{
+			ofstream register_file(rutaLog);
+			if(!register_file.is_open()){
+				cerr << "ERROR. No es pot obrir fitxer registre." << endl;
+			} else {	
+				string s;
+				while(getline(input_file, s)){
+					//Inv: ?
+					stringstream ss(s);
+					string word, pf;
+					bool first = true;
+					while(ss >> word){
+						string signe;
+						string word_correct = eliminaSignes??¿??(word, signe); //Posa nom funcio correcte
+						if(!dic.conte(word_correct)){
+							final_word = correccio(word_correcte);
+							register_file << word_correct << " -> " << final_word << endl;
+						}
+						if(!first) output_file << " ";
+						output_file << final_word << signe:
+						first = false;
+					}
+					output_file << endl;
+			}
+		}
+	}
 }
 		
 // ...

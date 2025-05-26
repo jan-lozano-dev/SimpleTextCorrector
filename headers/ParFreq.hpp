@@ -1,3 +1,4 @@
+
 #ifndef PARFREQ_HPP
 #define PARFREQ_HPP
 #include <string>
@@ -66,6 +67,11 @@ class ParFreq {
 		/* Post: El resultat indica si la paraula del paràmetre implícit
 		és igual a la paraula del parell rebut per paràmetre */ 	   
 		bool operator==(const ParFreq& pf) const;
+
+		/* Pre:  Cert  */
+		/* Post: El resultat indica si la paraula del paràmetre implícit
+		és més petita a la paraula del parell rebut per paràmetre */ 	
+		bool operator<(const ParFreq& pf) const;
 
 };
 #endif

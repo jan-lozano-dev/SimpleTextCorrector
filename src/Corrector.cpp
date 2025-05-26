@@ -10,6 +10,7 @@ pair<bool, string> Corrector::elimina_signes(string s) {
 	string signes = ".,!?";
 	pair<bool, string> res;
 	res.first = false;
+	res.second = "";
 	unsigned int i = 0;
 	if(s.length() != 0){
 		unsigned int signes_length = signes.length();

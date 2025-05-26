@@ -49,7 +49,7 @@ class Corrector {
 		
 		/*Pre: Cert*/
 		/*Post: RELLENAR*/
-		bool elimina_signes(string &s, string &signe);
+		bool elimina_signes(string &word, string &signe);
 		
 		/*Pre: Cert*/
 		/*Post: RELLENAR*/

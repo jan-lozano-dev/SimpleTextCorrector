@@ -6,11 +6,10 @@ Corrector::Corrector(const string &rutaDiccionari) { // carrega el diccionari (B
 	Dicc.omplir_BST(); //s'ordena el vector alfabeticament i s'implementa en el BTS
 }
 
-pair<bool, string> Corrector::elimina_signes(string s) {
+pair<bool, string> Corrector::elimina_signes(string &s) {
 	string signes = ".,!?";
 	pair<bool, string> res;
 	res.first = false;
-	res.second = "";
 	unsigned int i = 0;
 	if(s.length() != 0){
 		unsigned int signes_length = signes.length();
@@ -39,7 +38,7 @@ string Corrector::prioritzacio(queue <string> &candidates_f) {
     string res;
     int maxim = 0; // Inicialitzem amb un valor petit
 
-    while (!cua.empty()) {
+    while (!candidates_f.empty()) {
         string element = candidates_f.front(); // Agafem el primer element de la cua
         int freq_e = Dicc.getFrequencia(element);
         if (freq_e > maxim) {
@@ -110,10 +109,13 @@ void Corrector::substitueix(const string &s, queue<string> &candidates){
 	unsigned int n = s.length();
 	for(unsigned int i = 0; i < n; ++i){
 		//Inv:
+        aux = s;
 		unsigned int a_length = abecedari.length();
-		for(unsigned int j = 0; i < a_length; ++j){
-			aux[i] = abecedari[j];
-			if(Dic.conte(aux)) candidates.push(aux);
+		for(unsigned int j = 0; j < a_length; ++j){
+            if (aux[i] != abecedari[j]) {
+			    aux[i] = abecedari[j];
+			    if(Dicc.conte(aux)) candidates.push(aux);
+            }
 		}
 	}
 }
@@ -123,9 +125,9 @@ void Corrector::transposa(const string &s, queue<string> &candidates){
 	unsigned int n = s.size() - 1;
 	for(unsigned int i = 0; i < n; ++i){
 		//Inv: 
-		aux = paraula;
+		aux = s;
 		swap(aux[i], aux[i + 1]);
-		if(dic.conte(aux)) candidates.push(aux);
+		if(Dicc.conte(aux)) candidates.push(aux);
 	}
 }
 
@@ -140,7 +142,7 @@ void Corrector::processaText(const string &rutaInput, const string &rutaOutput, 
 	if(!fitxer.is_open()){
 		throw runtime_error("ERROR. No es pot obrir el fitxer: " + rutaInput);
 	} else{
-		ofstream output_fitxer(rutaLog);
+		ofstream output_fitxer(rutaOutput);
 		if(!output_fitxer.is_open()){
 			cerr << "ERROR. No es pot obrir fitxer output." << endl;
 		} else{
@@ -152,39 +154,35 @@ void Corrector::processaText(const string &rutaInput, const string &rutaOutput, 
                
                 	while(getline(fitxer, s)){
 					//Inv: ?
-				stringstream ss(s);
-				string paraula_i;
-				bool primera_p = true;
+				        stringstream ss(s);
+				        string paraula_i;
+				        bool primera_p = true;
 	
-				while(ss >> paraula_i) {
-					queue <string> candidates_i;
-					pair signes =  elimina_signes(paraula_i);
-					string paraula = paraula_i; 
-					
-					if(!Dicc.conte(paraula_i)) {                    
-		
-						insercio(paraula, candidates_i);
-						esborrat(paraula, candidates_i);
-						substitueix(paraula, candidates_i);
-						transposa(paraula, candidates_i);
+				        while(ss >> paraula_i) {
+					        queue <string> candidates_i;
+                            pair<bool, string> signes =  elimina_signes(paraula_i);
+                            string paraula = paraula_i; 
+                            
+                            if(!Dicc.conte(paraula_i)) {                    
+                
+                                insercio(paraula, candidates_i);
+                                esborrat(paraula, candidates_i);
+                                substitueix(paraula, candidates_i);
+                                transposa(paraula, candidates_i);
 
-                           			paraula = prioritzacio(candidates_i); /* funció que escull la paraula de les candidates amb la freqüència més alta i 
-                                                            l'afegeix a candidates_f */
-                         			register_fitxer << paraula_i << " -> " << paraula << endl;
+                                paraula = prioritzacio(candidates_i); /* funció que escull la paraula de les candidates amb la freqüència més alta i 
+                                                        l'afegeix a candidates_f */
+                                register_fitxer << paraula_i << " -> " << paraula << endl;
 
-                        		}
-                        		if(!primera_p){
-						output_fitxer << " ";
-						output_fitxer << paraula + signes.second;
-						primera_p = false;
-                        		} 
-                        		output_fitxer << paraula + signes.second;
-				}
-
-				output_fitxer << endl;
-
-                    
-                	}
+                            }
+                            if(!primera_p){
+                                output_fitxer << " ";
+                            }
+                            else { primera_p = false;} 
+                        output_fitxer << paraula + signes.second;
+				        }
+                        output_fitxer << endl;
+                    }
             }
         }
     }

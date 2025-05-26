@@ -2,9 +2,13 @@
 #define CORRECTOR_HPP
 #include "Diccionari.hpp"
 #include "ParFreq.hpp"
-#include "Diccionari.hpp"
+#include <fstream>
+#include <sstream>
 #include <algorithm>
 #include <vector>
+#include <string>
+#include <queue>
+
 using namespace std;
 
 class Corrector {

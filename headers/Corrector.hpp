@@ -87,12 +87,12 @@ class Corrector {
 		/*Pre: Cert*/
 		/*Post: Corregeix paraula substituint lletres a 's' que es creu que "son incorrectes" 
 				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void substitueix(const string &s, queue<string> &cua_aux);
+		void substitueix(const string &s, queue<string> &candidates);
 
 		/*Pre: Cert*/
 		/*Post: Corregeix paraula transposant lletres a 's' que es creu que "movent-les una posició seràn correctes" 
 				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void transposa(const string &s, queue<string> &cua_aux);
+		void transposa(const string &s, queue<string> &candidates);
 
 };
 

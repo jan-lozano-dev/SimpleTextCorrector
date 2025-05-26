@@ -37,7 +37,7 @@ typename BST<T>::Item* BST<T>::ef_insert(Item *node, const T& d, Item* &result, 
 		} else if(d > node->data){ //Element a inserir més gran que el node actual. Anem a la dreta.
 			Item* tmp = node->right;
 			//FF: mida subarbre amb arrel "tmp" on s'inserirà "d".
-			//HI: Suposem que posició on nserir "d" es troba dins subarbre dret que prèn per root "tmp".
+			//HI: Suposem que posició on inserir "d" es troba dins subarbre dret que prèn per root "tmp".
 			ef_insert(tmp, d, tmp, inserted);
 			node->right = tmp;
 			result = node;
@@ -72,13 +72,15 @@ void BST<T>::ef_find(Item* node, const T& d, Item*& result, bool& found) const {
 	if (!found && node != nullptr) {
 		//Cas base: Arribem a fulla o en crida recursiva anterior es troba d.
 		if (d < node->data) {
-            //FF: mida del subarbre pel que buscar.
-			//HI: ???
+            		//FF: mida del subarbre pel que buscar.
+			//HI: Si "d" es troba en el subarbre amb arrel "node->left", llavors "result"
+			//    apuntarà a aquest node i "found" serà cert.
 			ef_find(node->left, d, result, found);
         } else if (d > node->data) {
 			//FF: mida del subarbre pel que buscar.
-			//HI: ???
-            		ef_find(node->right, d, result, found);
+			//HI: Si "d" es troba en el subarbre amb arrel "node->right", llavors "result"
+			//    apuntarà a aquest node i "found" serà cert.
+			ef_find(node->right, d, result, found);
         } else {
             		found = true;
             		result = node;
@@ -107,6 +109,7 @@ BST<T>::BST() {
 }
 
 /* Esborra automàticament els objectes locals en sortir d'un àmbit de visibilitat */
+template <typename T>
 BST<T>::~BST() 
 { 
 	clear(root); //Crida a mètode privat. 

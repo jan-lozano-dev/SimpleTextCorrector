@@ -109,8 +109,10 @@ void Corrector::substitueix(const string &s, queue<string> &candidates){
 	unsigned int n = s.length();
 	for(unsigned int i = 0; i < n; ++i){
 		//Inv:
-		aux[i] = abecedari[j];
-		if(Dic.conte(aux)) candidates.push(aux);
+		unsigned int a_length = abecedari.length();
+		for(unsigned int j = 0; i < a_length; ++j){
+			aux[i] = abecedari[j];
+			if(Dic.conte(aux)) candidates.push(aux);
 	}
 }
 

@@ -34,18 +34,18 @@ pair<bool, string> Corrector::elimina_signes(string s) {
 		
 // Pre: la cua pasada per referència no és buida
 // Post: 
-string Corrector::prioritzacio(queue <string> &candidates_i) {
+string Corrector::prioritzacio(queue <string> &candidates_f) {
     string res;
     int maxim = 0; // Inicialitzem amb un valor petit
 
     while (!cua.empty()) {
-        string element = candidates_i.front(); // Agafem el primer element de la cua
+        string element = candidates_f.front(); // Agafem el primer element de la cua
         int freq_e = Dicc.getFrequencia(element);
         if (freq_e > maxim) {
             maxim = freq_e;
             res = element;
         }
-        candidates_i.pop(); // Eliminem l'element processat
+        candidates_f.pop(); // Eliminem l'element processat
     }
 
 

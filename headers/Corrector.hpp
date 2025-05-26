@@ -52,7 +52,7 @@ class Corrector {
 		 que hagi fet; altrament, mostra un missatge d'error */		
 		void processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog);
 				
-		/*Pre: Cert*/
+		// Pre: la cua pasada per referència no és buida
 		/*Post: RELLENAR*/
 		string prioritzacio(queue<string> &candidates_f);
 		

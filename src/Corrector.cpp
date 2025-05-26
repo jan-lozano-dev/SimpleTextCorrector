@@ -6,24 +6,30 @@ Corrector::Corrector(const string &rutaDiccionari) { // carrega el diccionari (B
 	Dicc.omplir_BST(); //s'ordena el vector alfabeticament i s'implementa en el BTS
 }
 
-bool Corrector::elimina_signes(string &word, string &signe){
+pair<bool, string> Corrector::elimina_signes(string s) {
 	string signes = ".,!?";
-	bool trobat = false;
+	pair<bool, string> res;
+	res.first = false;
 	unsigned int i = 0;
-	unsigned int n = word.length();
-	if(n != 0){
+	if(s.length() != 0){
 		unsigned int signes_length = signes.length();
-		while(!trobat and i < signes_length){
-			if(word[n - 1] == signes[i]){
-				signe = word[n - 1];
-				word.erase(n - 1, 1);
-				trobat = true;
-			} else {
-				++i:
-			}
-		}
+        
+	        // Cerca per cada caràcter de s
+	        while (i < s.length() && !res.first) {
+	            unsigned int j = 0;
+	            // Compara amb cada caràcter de signes
+	            while (j < signes_length && !res.first) {
+	                if (s[i] == signes[j]) {
+	                    res.first = true;
+	                    res.second = s[i];  // Caràcter eliminat
+	                    s.erase(i, 1);     // Elimina el caràcter de s
+	                }
+	                j++;
+	            }
+	            i++;
+	        }
 	}
-	return trobat
+	return res;
 }
 		
 string Corrector::prioritzacio(queue <string> &candidates_f) {

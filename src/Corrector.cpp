@@ -25,42 +25,12 @@ bool Corrector::elimina_signes(string &word, string &signe){
 	}
 	return trobat
 }
+		
+string Corrector::prioritzacio(queue <string> &candidates_i) {
+    string res;
 
-	
-void Corrector::processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog) {
-	ifstream input_file(rutaInput);
-	if(!input_file.is_open()){
-		throw runtime_error("ERROR. No es pot obrir el fitxer: " + rutaInput);
-	} else{
-		ofstream output_file(rutaLog);
-		if(!output_file.is_open()){
-			cerr << "ERROR. No es pot obrir fitxer output." << endl;
-		} else{
-			ofstream register_file(rutaLog);
-			if(!register_file.is_open()){
-				cerr << "ERROR. No es pot obrir fitxer registre." << endl;
-			} else {	
-				string s;
-				while(getline(input_file, s)){
-					//Inv: ?
-					stringstream ss(s);
-					string word, pf;
-					bool first = true;
-					while(ss >> word){
-						string signe;
-						string word_correct = elimina_signes(word, signe); //Posa nom funcio correcte
-						if(!dic.conte(word_correct)){
-							final_word = correccio(word_correcte);
-							register_file << word_correct << " -> " << final_word << endl;
-						}
-						if(!first) output_file << " ";
-						output_file << final_word << signe:
-						first = false;
-					}
-					output_file << endl;
-			}
-		}
-	}
+    
+    return res;
 }
 
 //string correcio(const string &s);
@@ -134,4 +104,65 @@ void Corrector::transposa(const string &word, queue<string> &pos){
 		swap(aux[i], aux[i + 1]);
 		if(dic.conte(aux)) pos.push(aux);
 	}
+}
+
+/* Pre: Cert */
+/* Post: Si rutaInput està associat a un fitxer, llegeix el
+ text del fitxer línia a línia, corregeix cadascuna de les
+ paraules de cada línia, les escriu al fitxer associat a
+ rutaOutput i escriu al fitxer associat a rutaLog els canvis
+ que hagi fet; altrament, mostra un missatge d'error */		
+void Corrector::processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog) {
+    ifstream fitxer(rutaInput);
+	if(!fitxer.is_open()){
+		throw runtime_error("ERROR. No es pot obrir el fitxer: " + rutaInput);
+	} else{
+		ofstream output_fitxer(rutaLog);
+		if(!output_fitxer.is_open()){
+			cerr << "ERROR. No es pot obrir fitxer output." << endl;
+		} else{
+			ofstream register_fitxer(rutaLog);
+			if(!register_fitxer.is_open()){
+				cerr << "ERROR. No es pot obrir fitxer registre." << endl;
+		} else {	
+               		 string s;
+               
+                	while(getline(fitxer, s)){
+					//Inv: ?
+				stringstream ss(s);
+				string paraula_i;
+				bool primera_p = true;
+	
+				while(ss >> paraula_i) {
+					queue <string> candidates_i;
+					pair signes =  elimina_signes(paraula_i);
+					string paraula = paraula_i; 
+					
+					if(!Dicc.conte(paraula_i)) {                    
+		
+						insercio(paraula, candidates_i);
+						esborrat(paraula, candidates_i);
+						substitueix(paraula, candidates_i);
+						transposa(paraula, candidates_i);
+
+                           			paraula = prioritzacio(candidates_i); /* funció que escull la paraula de les candidates amb la freqüència més alta i 
+                                                            l'afegeix a candidates_f */
+                         			register_fitxer << paraula_i << " -> " << paraula << endl;
+
+                        		}
+                        		if(!primera_p){
+						output_fitxer << " ";
+						output_fitxer << paraula + signes.second;
+						primera_p = false;
+                        		} 
+                        		output_fitxer << paraula + signes.second;
+				}
+
+				output_fitxer << endl;
+
+                    
+                	}
+            }
+        }
+    }
 }

@@ -72,7 +72,7 @@ void Corrector::insercio(const string &paraula, queue<string> &candidates) {
             s_prova = paraula; //igualem per evitar modificacions anteiors
             s_prova.insert(i, 1, tot[j]); // '.insert' és una funció implementada amb la llibreria string que insereix a la
 		// posició 'i' de 's_prova' 1 vegada el caràcter equivalent a 'tot[j]'
-			trobada = Dicc.conte(aux);							  
+			trobada = Dicc.conte(s_prova);							  
             if (trobada == true) candidates.push(s_prova);
         }
     }

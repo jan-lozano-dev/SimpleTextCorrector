@@ -65,7 +65,7 @@ void Corrector::esborrat(const string &paraula, queue<string>&candidates) {
         s_prova.erase(i, 1); // '.erase' és una funció implementada amb la llibreria string que elimina 1 caràcter de la 
 							// posició 'i' del string 's_prova'
 
-        if ( s_prova.empty() == false and Dicc.conte(s_prova) ) candidates.push(s_prova);
+        if (s_prova.empty() == false and Dicc.conte(s_prova) ) candidates.push(s_prova);
     }
 }
 
@@ -114,6 +114,31 @@ void Corrector::processaText(const string &rutaInput, const string &rutaOutput, 
 		
 // ...
 
+/* Pre: cert*/
+/* Post: intenta corregir paraula esborrant lletres "sobrants" mirant opció sugerida per frequüència al diccionari.*/
+void Corrector::esborrat(const string &word, queue<string> &pos){
+	string aux;
+	unsigned int n = word.length();
+	for(unsigned int i = 0; i < n; ++i){
+		//Inv:
+		aux = word;
+		aux.erase(i,1);
+		if(!aux.empty() and dic.conte(aux)) pos.push(aux);
+	}
+}
+
+/* Pre: cert */
+/* Post: intenta corregir paraula transposant lletres mirant opció sugerida per frequüència al diccionari.*/
+void Corrector::transposa(const string &word, queue<string> &pos){
+	string aux;
+	unsigned int n = word.size() - 1;
+	for(unsigned int i = 0; i < n; ++i){
+		//Inv: 
+		aux = paraula;
+		swap(aux[i], aux[i + 1]);
+		if(dic.conte(aux)) pos.push(aux);
+	}
+}
 //*********************************************************
 //Lectura i escriptura
 //*********************************************************		

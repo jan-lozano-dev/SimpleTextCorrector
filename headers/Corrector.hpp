@@ -9,7 +9,8 @@
 #include <string>
 #include <queue>
 
-using namespace std;
+
+
 
 class Corrector {
 // Tipus de mòdul: dades
@@ -33,7 +34,7 @@ class Corrector {
 		/* Post: Si rutaDiccionari està associat a un fitxer, llegeix
 		 les entrades del fitxer i omple el diccionari del corrector
 		 que crea; altrament, mostra un missatge d'error */
-		Corrector(const string &rutaDiccionari);   // carrega el diccionari (BST)
+		Corrector(const std::string &rutaDiccionari);   // carrega el diccionari (BST)
 
 		//*********************************************************
 		// Modificadors
@@ -42,8 +43,12 @@ class Corrector {
 		//Mètode auxiliar per funció processaText.
 		//*Pre: Cert*/
 		/*Post: Si hi ha algun d'aquests signes ". , ! ? ; ” retorna un pair on el primer terme és un bool true i el segon
-		  element és el signe que s'ha eliminat, altrament el primer element és un false i el segon un string buit */
-		pair<bool, string> elimina_signes(string &s);
+		element és el signe que s'ha eliminat, altrament el primer element és un false i el segon un string buit */
+		std::pair<bool, std::string> elimina_signes(std::string &s);
+
+		// Pre: la cua pasada per referència no és buida
+		/* Post: s'ha extret de la cua de candidates el string que té adjunta en el seu ParFreq del Diccionari Dicc la freqüència més alta*/
+		std::string prioritzacio(queue<std::string> &candidates_f);
 
 		/* Pre: Cert */
 		/* Post: Si rutaInput està associat a un fitxer, llegeix el
@@ -51,21 +56,10 @@ class Corrector {
 		 paraules de cada línia, les escriu al fitxer associat a
 		 rutaOutput i escriu al fitxer associat a rutaLog els canvis
 		 que hagi fet; altrament, mostra un missatge d'error */		
-		void processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog);
+		void processaText(const std::string &rutaInput, const std::string &rutaOutput, const std::string &rutaLog);
 				
-		// Pre: la cua pasada per referència no és buida
-		/*Post: RELLENAR*/
-		string prioritzacio(queue<string> &candidates_f);
 		
-		//*********************************************************
-		//Lectura i escriptura
-		//*********************************************************		w
 
-		/* Pre: Cert */
-		/* Post: S'han escrit al fitxer associat a rutaLog totes 
-		 les correccions fetes al text d'entrada sent el format de
-		 cada línia paraula_original -> paraula_corregida */
-		void bolcaRegistre(const string &rutaLog);
 
 	private:
 		Diccionari Dicc;	
@@ -73,28 +67,27 @@ class Corrector {
 		//MÈTODES PRIVATS
 
 		/*Pre: Cert*/
-		/*Post1: Es creen paraules inserint lletres a cada posició de 'paraula' pasada per paràmetre i si són dins del BST es guarden 
+		/*Post: Es creen paraules inserint lletres a cada posició de 's' pasada per paràmetre i si són dins del BST es guarden 
 		dins de la cua 'candidates'*/
-		/*Pos2t: Corregeix paraula insertant lletres a 's' que es creu que "falten" 
-		donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void insercio(const string &s, queue<string> &candidates);
+		void insercio(const std::string &s, queue<std::string> &candidates);
 
 		/*Pre: Cert*/
 		/*Post: Corregeix paraula eliminant lletres a 's' que es creu que "sobren" 
-		donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void esborrat(const string &s, queue<string>&candidates);
+		i si la nova formada és dins del Diccionari s'afegeix a la cua de 'candidates'.*/
+		void esborrat(const std::string &s, queue<std::string>&candidates);
 
 
 		/*Pre: Cert*/
 		/*Post: Corregeix paraula substituint lletres a 's' que es creu que "son incorrectes" 
-				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void substitueix(const string &s, queue<string> &candidates);
+		i si la nova formada és dins del Diccionari s'afegeix a la cua de 'candidates'.*/
+		void substitueix(const std::string &s, queue<std::string> &candidates);
 
 		/*Pre: Cert*/
 		/*Post: Corregeix paraula transposant lletres a 's' que es creu que "movent-les una posició seràn correctes" 
-				donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void transposa(const string &s, queue<string> &candidates);
+		i si la nova formada és dins del Diccionari s'afegeix a la cua de 'candidates'.*/
+		void transposa(const std::string &s, queue<std::string> &candidates);
 
 };
 
 #endif
+

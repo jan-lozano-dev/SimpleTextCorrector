@@ -1,7 +1,6 @@
 #ifndef BST_HPP
 #define BST_HPP
 #include <iostream>
-#include "BinaryTree.hpp"
 using namespace std;
 
 /* Representació d'un arbre binari cerca o BST (binary search tree).

@@ -2,7 +2,7 @@
 using namespace std;
 
 Corrector::Corrector(const string &rutaDiccionari) { // carrega el diccionari (BST)
-	Dicc.llegeixDeFitxer(&rutaDiccionari); //s'ompla el vector vd en la classe Diccionari
+	Dicc.llegeixDeFitxer(rutaDiccionari); //s'ompla el vector vd en la classe Diccionari
 	Dicc.omplir_BST(); //s'ordena el vector alfabeticament i s'implementa en el BTS
 }
 

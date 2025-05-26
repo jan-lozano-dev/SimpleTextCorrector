@@ -5,6 +5,10 @@ using namespace std;
 // IMPLEMENTACIÓ DE LA CLASSE Diccionari
 // (implementació de tots els mètodes especificats en el fitxer Diccionari.hpp)
 
+bool ordenarVector(const ParFreq& a, const ParFreq& b) {
+    
+    return a.getParaula() < b.getParaula();
+}
 
 
 //*********************************************************
@@ -37,13 +41,13 @@ void Diccionari::ef_omplir_BST(vector<ParFreq> &v, int pos_i, int pos_f){
     arbre_ord.insert(pf_ins); //la funció insert comprovarà que no hi ha cap altre ParFreq igual a pf_ins dins del BST
 
     if (pos_f - pos_i > 1){
-        ef_omplir_BST(v_aux, pos_i, meitat);
+        ef_omplir_BST(v, pos_i, meitat);
         /* HI: Si les paraules dels parells que es troben en el vector des de l'inici fins la meitat
         apareixien ja al diccionari, s'han afegit al diccionari els parells rebuts en el vector 
         per paràmetre; altrament, el diccionari no s'ha modificat. */
         /* Fita: la mida del vector que comprèn del ini fins al mig. */
 
-        ef_omplir_BST(v_aux, meitat, pos_f);
+        ef_omplir_BST(v, meitat, pos_f);
         /* HI: Si les paraules dels parells que es troben en el vector des de la meitat fins al final
         apareixien ja al diccionari, s'han afegit al diccionari els parells rebuts en el vector 
         per paràmetre; altrament, el diccionari no s'ha modificat. */
@@ -62,11 +66,11 @@ apareixia ja al diccionari, s'ha afegit al diccionari el
 parell rebut per paràmetre; altrament, el diccionari no 
 s'ha modificat */
 void Diccionari::omplir_BST() { // inserció en el BST 
-    sort(v_aux.begin(), v_aux.end(), a.getParaula() < b.getParaula()); // Ordenar el vector vd alfabèticament
+    sort(v_aux.begin(), v_aux.end(), ordenarVector); // Ordenar el vector vd alfabèticament
     //bool ordenarVector(const ParFreq& a, const ParFreq& b) {
     //return a.getParaula() < b.getParaula();}
     // traslladem el vector ordenat a el BTS arbre_ord
-    int posi_f = v.size()-1; //posició final del vector
+    int posi_f = v_aux.size()-1; //posició final del vector
     int posi_i = 0;          //posició inicial del vector
 
     ef_omplir_BST(v_aux, posi_i, posi_f);
@@ -106,7 +110,7 @@ int Diccionari::getFrequencia(const string &paraula) const {
     pair res = arbre_ord.find(pfcerca); 
 
 
-    return res.second.getFrequencia() // Ens han dit que la paraula ja és en el diccionari, no fa falta comprobar si ho està
+    return res.second.getFrequencia(); // Ens han dit que la paraula ja és en el diccionari, no fa falta comprobar si ho està
 }
 
 

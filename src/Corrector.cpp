@@ -26,7 +26,7 @@ bool Corrector::elimina_signes(string &word, string &signe){
 	return trobat
 }
 		
-string Corrector::prioritzacio(queue <string> &candidates_i) {
+string Corrector::prioritzacio(queue <string> &candidates_f) {
     string res;
 
     

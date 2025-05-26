@@ -4,19 +4,11 @@
 #include "BinaryTree.hpp"
 using namespace std;
 
-/*  
- * Representació d'un arbre binari cerca o
- * BST (binary search tree).
- * Un arbre binari de cerca és un arbre binari
- * en què el subarbre esquerre de qualsevol node
- * (si no està buit) conté valors menors que el
- * que conté aquest node, i el subarbre dret
- * (si no està buit) conté valors més grans.
- */ 
-
+/* Representació d'un arbre binari cerca o BST (binary search tree).
+ * Un arbre binari de cerca és un arbre binari en què el subarbre esquerre de qualsevol node
+ * (si no està buit) conté valors menors que el que conté aquest node, i el subarbre dret(si no està buit) conté valors més grans. */ 
 template <typename T>
 class BST  {
-	
 	private:
 		struct Item {
 			T data;
@@ -30,16 +22,11 @@ class BST  {
 		};
 
 		Item *root;
-	
-	
 		//*********************************************************
 		// Mètodes privats auxiliars
 		//*********************************************************
-		
 		/* Pre: Cert */
-		/* Post: No fa res si 'node' és NULL, sinó 
-		   allibera espai de la jerarquia de nodes
-		   apuntada per 'node' */
+		/* Post: No fa res si 'node' és NULL, sinó allibera espai de la jerarquia de nodes apuntada per 'node' */
 		void clear(Item *node);
 
 		/* Pre: Cert */
@@ -49,21 +36,17 @@ class BST  {
 		Item* ef_insert(Item *node, const T& d, Item* &result, bool &inserted);
 		
 		/* Pre: Cert */
-		/* Post: Afegeix un node nou amb el valor
-		   rebut per paràmetre a la jerarquia de
-		   nodes apuntada per 'node', mantenint
-		   les propietats de BST */
+		/* Post: Afegeix un node nou amb el valor rebut per paràmetre a la jerarquia de nodes
+				 apuntada per 'node', mantenint les propietats de BST */
 		Item* insert(Item *node, const T& d);
 
 		/* Pre: Cert */
 		/* Post: Si existeix node amb root == d en subarbre que "node" apunta, booleà "found" 
-  			 serà true i "result" apuntarà a aquest node. Cas contrari, "found" false i 
-      			 result == nullptr. */
+  			 	 serà true i "result" apuntarà a aquest node. Cas contrari, "found" false i result == nullptr. */
 		void ef_find(Item* node, const T& d, Item*& result, bool& found) const;
 
 		/* Pre: Cert */
-		/* Post: El resultat és el node de la jerarquia
-		   de nodes apuntada per 'node', amb el mateix
+		/* Post: El resultat és el node de la jerarquia de nodes apuntada per 'node', amb el mateix
 		   valor que el valor rebut per paràmetre */
 		Item* find(Item *node, const T& d) const;
 	
@@ -73,7 +56,6 @@ class BST  {
 		//*********************************************************
 		// Constructors
 		//*********************************************************
-	
 		/* Pre: Cert */
 		/* Post: El resultat és un bst sense cap element */	
 		BST();
@@ -82,7 +64,6 @@ class BST  {
 		//*********************************************************
 		// Destructor
 		//*********************************************************
-	
 		/* Esborra automàticament els objectes locals
 		   en sortir d'un àmbit de visibilitat */
 		~BST();
@@ -90,7 +71,6 @@ class BST  {
 		//*********************************************************
 		// Modificadors
 		//*********************************************************
-
 		/* Pre: Cert */
 		/* Post: Afegeix un element, amb el valor rebut
 		   per paràmetre, al bst paràmetre implícit */
@@ -100,8 +80,6 @@ class BST  {
 		//*********************************************************
 		// Consultors
 		//*********************************************************	
-		
-
 		/* Pre: Cert */
 		/* Post: El primer component del resultat indica
 		   si el bst paràmetre implícit conté un element
@@ -110,10 +88,5 @@ class BST  {
 		   implícit amb aquest valor, altrament conté un
 		   element buit */
 		pair<bool, T> find(const T& d) const;
-
-	
 };
-
-#include "BST.cpp"
-
 #endif

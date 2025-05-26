@@ -77,12 +77,12 @@ class Corrector {
 		dins de la cua 'candidates'*/
 		/*Pos2t: Corregeix paraula insertant lletres a 's' que es creu que "falten" 
 		donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void insercio(const string &paraula, queue<string> &candidates);
+		void insercio(const string &s, queue<string> &candidates);
 
 		/*Pre: Cert*/
 		/*Post: Corregeix paraula eliminant lletres a 's' que es creu que "sobren" 
 		donada paraula del diccionari que per freqüència sembla ser la més correcta.*/
-		void esborrat(const string &paraula, queue<string>&candidates);
+		void esborrat(const string &s, queue<string>&candidates);
 
 
 		/*Pre: Cert*/

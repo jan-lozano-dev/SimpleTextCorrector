@@ -38,7 +38,12 @@ class Corrector {
 		//*********************************************************
 		// Modificadors
 		//*********************************************************
-		
+
+		//Mètode auxiliar per funció processaText.
+		/*Pre: Cert*/
+		/*Post: RELLENAR*/
+		bool elimina_signes(string &word, string &signe);
+
 		/* Pre: Cert */
 		/* Post: Si rutaInput està associat a un fitxer, llegeix el
 		 text del fitxer línia a línia, corregeix cadascuna de les
@@ -46,11 +51,7 @@ class Corrector {
 		 rutaOutput i escriu al fitxer associat a rutaLog els canvis
 		 que hagi fet; altrament, mostra un missatge d'error */		
 		void processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog);
-		
-		/*Pre: Cert*/
-		/*Post: RELLENAR*/
-		bool elimina_signes(string &word, string &signe);
-		
+				
 		/*Pre: Cert*/
 		/*Post: RELLENAR*/
 		string correcio(const string &s);

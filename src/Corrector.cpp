@@ -2,6 +2,14 @@
 #include "Corrector.hpp"
 using namespace std;
 
+//*********************************************************
+// Constructors
+//*********************************************************
+
+/* Pre: Cert */
+/* Post: Si rutaDiccionari està associat a un fitxer, llegeix
+les entrades del fitxer i omple el diccionari del corrector
+que crea; altrament, mostra un missatge d'error */
 Corrector::Corrector(const string &rutaDiccionari) { // carrega el diccionari (BST)
 	Dicc.llegeixDeFitxer(rutaDiccionari); //s'ompla el vector vd en la classe Diccionari
 	Dicc.omplir_BST(); //s'ordena el vector alfabeticament i s'implementa en el BTS

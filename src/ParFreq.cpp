@@ -48,3 +48,7 @@ int ParFreq::getFrequencia() const{
 bool ParFreq::operator==(const ParFreq& pf) const{
   return dades == pf.dades;
 }
+
+bool ParFreq::operator<(const ParFreq& pf) const {
+  return dades.first < pf.dades.first;
+}

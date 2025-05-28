@@ -1,5 +1,7 @@
+#include <iostream>
 #include "BST.hpp"
 
+using namespace std;
 /* Pre: Cert */
 /* Post: No fa res si 'node' és NULL, sinó allibera espai de la jerarquia de nodes apuntada per 'node' */
 template <typename T>
@@ -72,7 +74,7 @@ void BST<T>::ef_find(Item* node, const T& d, Item*& result, bool& found) const {
 	if (!found && node != nullptr) {
 		//Cas base: Arribem a fulla o en crida recursiva anterior es troba d.
 		if (d < node->data) {
-            		//FF: mida del subarbre pel que buscar.
+            //FF: mida del subarbre pel que buscar.
 			//HI: Si "d" es troba en el subarbre amb arrel "node->left", llavors "result"
 			//    apuntarà a aquest node i "found" serà cert.
 			ef_find(node->left, d, result, found);
@@ -138,3 +140,6 @@ pair<bool, T> BST<T>::find(const T& d) const
 	}
 	return res;
 }
+
+#include "ParFreq.hpp"
+template class BST<ParFreq>;

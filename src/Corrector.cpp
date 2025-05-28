@@ -2,13 +2,8 @@
 #include "Corrector.hpp"
 using namespace std;
 
-//*********************************************************
-// Constructors
-//*********************************************************
-
 /* Pre: Cert */
-/* Post: Si rutaDiccionari està associat a un fitxer, llegeix
-les entrades del fitxer i omple el diccionari del corrector
+/* Post: Si rutaDiccionari està associat a un fitxer, llegeix les entrades del fitxer i omple el diccionari del corrector
 que crea; altrament, mostra un missatge d'error */
 Corrector::Corrector(const string &rutaDiccionari) { // carrega el diccionari (BST)
 	Dicc.llegeixDeFitxer(rutaDiccionari); //s'ompla el vector vd en la classe Diccionari
@@ -25,11 +20,9 @@ pair<bool, string> Corrector::elimina_signes(string &s) {
 	unsigned int i = 0;
 	if(s.length() != 0){
 		unsigned int signes_length = signes.length();
-        
 	        while (i < s.length() && !res.first) {
 				// Inv: el bucle ha comparat  cada caràcter de 's' amb cada caràcter de 'signes' i para si trobar alguna igualtat
 	            unsigned int j = 0;
-	            
 	            while (j < signes_length && !res.first) {
 					// Inv: Compara amb cada caràcter de string amb el caràcter s[i]
 	                if (s[i] == signes[j]) {
@@ -46,7 +39,7 @@ pair<bool, string> Corrector::elimina_signes(string &s) {
 }
 		
 // Pre: la cua pasada per referència no és buida
-/* Post: s'ha extret de la cua de candidates el string que té adjunta en el seu ParFreq del Diccionari Dicc la freqüència més alta*/
+// Post: s'ha extret de la cua de candidates el string que té adjunta en el seu ParFreq del Diccionari Dicc la freqüència més alta*/
 string Corrector::prioritzacio(queue <string> &candidates_f) {
     string res;
     int maxim = 0; // Inicialitzem amb un valor petit
@@ -150,10 +143,8 @@ void Corrector::transposa(const string &s, queue<string> &candidates){
 }
 
 /* Pre: Cert */
-/* Post: Si rutaInput està associat a un fitxer, llegeix el
- text del fitxer línia a línia, corregeix cadascuna de les
- paraules de cada línia, les escriu al fitxer associat a
- rutaOutput i escriu al fitxer associat a rutaLog els canvis
+/* Post: Si rutaInput està associat a un fitxer, llegeix el text del fitxer línia a línia, corregeix cadascuna de les
+ paraules de cada línia, les escriu al fitxer associat a rutaOutput i escriu al fitxer associat a rutaLog els canvis
  que hagi fet; altrament, mostra un missatge d'error */		
 void Corrector::processaText(const string &rutaInput, const string &rutaOutput, const string &rutaLog) {
     ifstream fitxer(rutaInput);
@@ -168,40 +159,39 @@ void Corrector::processaText(const string &rutaInput, const string &rutaOutput, 
 			if(!register_fitxer.is_open()){
 				cerr << "ERROR. No es pot obrir fitxer registre." << endl;
 		} else {	
-               		 string s;
-               
-                	while(getline(fitxer, s)){
-						//Inv: Llegeix les línies del fitxer han estat llegides i processa les paraules del fitxer d'acord amb la Post de la funció 'processaText'
-						//Fita: nombre de línies del fitxer d'entrada per rutaInput
-						bool primera_p = true;
-				        stringstream ss(s);
-				        string paraula_i;
-	
-				        while(ss >> paraula_i) {
-							//Inv: S’han processat totes les paraules de la línia 'ss' i tractades d'acord amb la Post de la funció 'processaText'
-							//Fita: nombre de strings separats per espais de cada línea
-					        queue <string> candidates_i;
-                            pair<bool, string> signes =  elimina_signes(paraula_i);
-                            string paraula = paraula_i; 
-                            
-                            if(!Dicc.conte(paraula_i)) {                    
-                                insercio(paraula, candidates_i);
-                                esborrat(paraula, candidates_i);
-                                substitueix(paraula, candidates_i);
-                                transposa(paraula, candidates_i);
-                                if(!candidates_i.empty()){
-									paraula = prioritzacio(candidates_i); /* funció escull paraula de candidates amb freqüència més alta i afegeix a candidates_f */
-									register_fitxer << paraula_i << " -> " << paraula << endl;
-								}
-                            }
-                            if(!primera_p){
-                                output_fitxer << " ";
-                            }
-                            else { primera_p = false;} 
-                        output_fitxer << paraula + signes.second;
-				        }
-                        output_fitxer << endl;
-                    }
+               	string s;
+				while(getline(fitxer, s)){
+					//Inv: Llegeix les línies del fitxer han estat llegides i processa les paraules del fitxer d'acord amb la Post de la funció 'processaText'
+					//Fita: nombre de línies del fitxer d'entrada per rutaInput
+					bool primera_p = true;
+					stringstream ss(s);
+					string paraula_i;
+
+					while(ss >> paraula_i) {
+						//Inv: S’han processat totes les paraules de la línia 'ss' i tractades d'acord amb la Post de la funció 'processaText'
+						//Fita: nombre de strings separats per espais de cada línea
+						queue <string> candidates_i;
+						pair<bool, string> signes =  elimina_signes(paraula_i);
+						string paraula = paraula_i; 
+						
+						if(!Dicc.conte(paraula_i)) {                    
+							insercio(paraula, candidates_i);
+							esborrat(paraula, candidates_i);
+							substitueix(paraula, candidates_i);
+							transposa(paraula, candidates_i);
+							if(!candidates_i.empty()){
+								paraula = prioritzacio(candidates_i); /* funció escull paraula de candidates amb freqüència més alta i afegeix a candidates_f */
+								register_fitxer << paraula_i << " -> " << paraula << endl;
+							}
+						}
+						if(!primera_p){
+							output_fitxer << " ";
+						}
+						else { primera_p = false;} 
+					output_fitxer << paraula + signes.second;
+					}
+					output_fitxer << endl;
+				}
             }
         }
     }

@@ -8,15 +8,14 @@
 #include <algorithm>
 #include <vector>
 #include "ParFreq.hpp"
+
 using namespace std;
 
 class Diccionari {
 // Tipus de mòdul: dades
-// Descripció del tipus: Representa el conjunt d'entrades (paraules i freqüència)
-//						d'un diccionari.
+// Descripció del tipus: Representa el conjunt d'entrades (paraules i freqüència) d'un diccionari.
 	
 	public:
-  	
 	   //*********************************************************
 	   // Constructors
 	   //*********************************************************
@@ -24,8 +23,6 @@ class Diccionari {
 	   /* Post: El resultat és un Diccionari sense cap ParFeq */	
 	   Diccionari();
 
-	   //...
-	   
 	   //*********************************************************
 	   // Destructor
 	   //*********************************************************
@@ -33,13 +30,12 @@ class Diccionari {
        en sortir d'un àmbit de visibilitat */
 		~Diccionari();
 
-	   //...
 
 	   /* Pre: Cert */
 	   /* Post: Si les paraules dels parells que es troben en el vector rebut per paràmetre no
 	   apareixien ja al diccionari, s'han afegit al diccionari els parells rebuts en el vector per
 	   paràmetre; altrament, el diccionari no s'ha modificat */
-	   void ef_omplir_BST(vector<ParFreq> &v, int pos_i, int pos_f);
+	   void ef_omplir_BST(int lo, int hi);
 	 
    	   //*********************************************************
 	   // Modificadors
@@ -51,18 +47,9 @@ class Diccionari {
 		s'ha modificat */
 		void omplir_BST(); // inserció en el BST 
 
-	   /* Pre: Cert */
-	   /* Post: Si la paraula del parell rebut per  paràmetre no 
-		apareixia ja al diccionari, s'ha afegit al diccionari el
-		parell rebut per paràmetre; altrament, el diccionari no 
-		s'ha modificat */
-	   //void insereix(const ParFreq &pf);  // inserció en el BST
-	   
-
 	   //*********************************************************
 	   // Consultors
-	   //*********************************************************
-	   
+	   //*********************************************************	   
 	   // Pre: Cert
 	   // Post: retorna el vector 'vd' de ParFreq's del Diccionari 
 	   vector<ParFreq> getVector() const;
@@ -78,15 +65,10 @@ class Diccionari {
 	   /* Post: El resultat és la freqüència que apareix al
 		diccionari de la paraula rebuda per paràmetre */	 
 	   int getFrequencia(const string &paraula) const;
-	   
-	   //...
-	   
-	   //...
-	   
+
 	   //*********************************************************
 	   //Lectura i escriptura
 	   //*********************************************************
-	   
 	   /* Pre: Cert */
 	   /* Post: Si el path rebut per paràmetre està associat a un
 		fitxer, llegeix el fitxer de parells (paraula, freqüència)
@@ -95,10 +77,7 @@ class Diccionari {
 	   void llegeixDeFitxer(const string &path);
 	  
 	private:
-	vector <ParFreq> v_aux; // és el vector auxiliar en què hi van els ParFreqs recent llegits pel fitxer dicc.txt
-	BST <ParFreq> arbre_ord;
-		// IMPLEMENTACIÓ DE LA CLASSE Diccionari 
-		// (definició del nom i tipus de cada atribut)
-		// (poden definir-se mètodes privats que actuïn com a funcions auxiliars)
+		vector <ParFreq> v_aux; // Vector auxiliar on van ParFreq recent llegits per fitxer dicc.txt
+		BST <ParFreq> arbre_ord;
 };
 #endif

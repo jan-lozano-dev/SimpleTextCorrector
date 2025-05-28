@@ -22,5 +22,16 @@ test1:
 	
 	diff -b registre1.log registre1.cor
 
+test2: 
+	./program.exe diccionari_freq2.txt sample2.inp sample2.out registre2.log
 	
+	diff -b sample2.out sample2.cor
 	
+	diff -b registre2.log registre2.cor
+	
+test3: 
+	./program.exe diccionari_freq3.txt sample3.inp sample3.out registre3.log
+	
+	diff -b sample3.out sample3.cor
+	
+	diff -b registre3.log registre3.cor

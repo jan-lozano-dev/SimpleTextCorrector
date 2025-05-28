@@ -19,7 +19,7 @@ This program processes a text file and automatically corrects spelling mistakes.
 - Generates a log of **all corrections** made. (.reg file)
 
 ## 📁 Project Structure
-- Headers include:
+:
     - BST (Binary Search Tree) with insert and find optimized recursive functions.
     - ParFreq data type. A pair that contains a string and a frequency. Example: apple 100.
     - Diccionari: object structured as a BST of ParFreq, which contains words and their

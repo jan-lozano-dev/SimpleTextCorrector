@@ -1,93 +1,86 @@
-#ifndef CORRECTOR_HPP
-#define CORRECTOR_HPP
-#include "Diccionari.hpp"
-#include "ParFreq.hpp"
-#include <fstream>
-#include <sstream>
-#include <algorithm>
-#include <vector>
+#ifndef PARFREQ_HPP
+#define PARFREQ_HPP
 #include <string>
-#include <queue>
+#include <utility>
 
+using namespace std;
 
-
-
-class Corrector {
+class ParFreq {
 // Tipus de mòdul: dades
-// Descripció del tipus: Emmagatzema un diccionari de parells (paraula, freqüència)
-//						 i proporciona mètodes per llegir un text pla d'un fitxer de
-//						 text, corregir-lo ortogràficament i escriure'l corregit en
-//						 un fitxer de text. La correcció ortogràfica d'una paraula
-//						 s'obté generant paraules candidates a distància d'edició 1,
-//						 que es trobin en el diccionari i donant com a resultat la
-//						 de major freqüència. 
-//						 També emmagatzema i escriu en un fitxer de registre els
-//						 canvis fets en el fitxer original.
-	
-	public:
-	
+// Descripció del tipus: Representa una paraula amb la seva freqüència d'aparició en un corpus gran. 
+	   
+	private:
+		pair<string, int> dades;
+		//El string es la paraula insertada. Ex: "Apple"
+		//El int es la freqüència donada al input juntament amb el string. Ex: "100"
+		//INPUT EXEMPLE: Apple 100
+
+	public:	
 		//*********************************************************
 		// Constructors
-		//*********************************************************
+	  	//*********************************************************
+	  	/*Pre: Cert*/
+	  	/*Post: El resultat és un ParFreq sense cap element.*/
+	  	ParFreq();
+
+		/* Pre: Cert */
+    	/* Post: el paràmetre implícit és una copia profunda de la ParFreq donada com a paràmetre. */	
+		ParFreq(const ParFreq &pf);
 		
 		/* Pre: Cert */
-		/* Post: Si rutaDiccionari està associat a un fitxer, llegeix
-		 les entrades del fitxer i omple el diccionari del corrector
-		 que crea; altrament, mostra un missatge d'error */
-		Corrector(const std::string &rutaDiccionari);   // carrega el diccionari (BST)
-
+		/* Post: El paràmetre implícit és una ParFreq amb s com a paraula i amb n com freqüència. */
+		ParFreq(const string &s, const int &n);
+		
+		//*********************************************************
+		// Destructor
+		//*********************************************************
+		/*Esborra automàticament els objectes locals en sortir d'un `àmbit de
+		visibilitat.*/	   
+		~ParFreq();
+		
 		//*********************************************************
 		// Modificadors
 		//*********************************************************
-
-		//Mètode auxiliar per funció processaText.
-		//*Pre: Cert*/
-		/*Post: Si hi ha algun d'aquests signes ". , ! ? ; ” retorna un pair on el primer terme és un bool true i el segon
-		element és el signe que s'ha eliminat, altrament el primer element és un false i el segon un string buit */
-		std::pair<bool, std::string> elimina_signes(std::string &s);
-
-		// Pre: la cua pasada per referència no és buida
-		/* Post: s'ha extret de la cua de candidates el string que té adjunta en el seu ParFreq del Diccionari Dicc la freqüència més alta*/
-		std::string prioritzacio(queue<std::string> &candidates_f);
-
+		/* Pre: cert*/
+		/* Post: es substitueix el paràmetre implícit paraula per s.*/
+		void insertParaula(const string &s);
+		
+		/* Pre: cert*/
+		/* Post: es substitueix el paràmetre implícit freq per n.*/
+		void insertFreq(const int &n);
+		   
+		//*********************************************************
+		// Consultors
+		//*********************************************************
 		/* Pre: Cert */
-		/* Post: Si rutaInput està associat a un fitxer, llegeix el
-		 text del fitxer línia a línia, corregeix cadascuna de les
-		 paraules de cada línia, les escriu al fitxer associat a
-		 rutaOutput i escriu al fitxer associat a rutaLog els canvis
-		 que hagi fet; altrament, mostra un missatge d'error */		
-		void processaText(const std::string &rutaInput, const std::string &rutaOutput, const std::string &rutaLog);
-				
+		/* Post: El resultat és el pair del paràmetre implícit */
+		pair<string, int> getPair() const;
+		/* Pre: Cert */
+		/* Post: El resultat és la paraula del paràmetre implícit */
+		string getParaula() const;
 		
-
-
-	private:
-		Diccionari Dicc;	
+		/* Pre: Cert */
+		/* Post: El resultat és la freqüència del paràmetre implícit */
+		int getFrequencia() const;
 		
-		//MÈTODES PRIVATS
+		/* Pre:  Cert  */
+		/* Post: El resultat indica si la paraula del paràmetre implícit
+		és igual a la paraula del parell rebut per paràmetre */ 	   
+		bool operator==(const ParFreq& pf) const;
 
-		/*Pre: Cert*/
-		/*Post: Es creen paraules inserint lletres a cada posició de 's' pasada per paràmetre i si són dins del BST es guarden 
-		dins de la cua 'candidates'*/
-		void insercio(const std::string &s, queue<std::string> &candidates);
+		/* Pre:  Cert  */
+		/* Post: El resultat indica si la paraula del paràmetre implícit
+		és més petita a la paraula del parell rebut per paràmetre */ 	
+		bool operator<(const ParFreq& pf) const;
 
-		/*Pre: Cert*/
-		/*Post: Corregeix paraula eliminant lletres a 's' que es creu que "sobren" 
-		i si la nova formada és dins del Diccionari s'afegeix a la cua de 'candidates'.*/
-		void esborrat(const std::string &s, queue<std::string>&candidates);
+		/* Pre:  Cert  */
+		/* Post: El resultat indica si la paraula del paràmetre implícit
+		és més gran a la paraula del parell rebut per paràmetre */
+		bool operator>(const ParFreq& other) const;
 
-
-		/*Pre: Cert*/
-		/*Post: Corregeix paraula substituint lletres a 's' que es creu que "son incorrectes" 
-		i si la nova formada és dins del Diccionari s'afegeix a la cua de 'candidates'.*/
-		void substitueix(const std::string &s, queue<std::string> &candidates);
-
-		/*Pre: Cert*/
-		/*Post: Corregeix paraula transposant lletres a 's' que es creu que "movent-les una posició seràn correctes" 
-		i si la nova formada és dins del Diccionari s'afegeix a la cua de 'candidates'.*/
-		void transposa(const std::string &s, queue<std::string> &candidates);
-
+		/* Pre:  Cert  */
+		/* Post: El  p.i. té ara la mateixa paraula i freqüència que el paràmetre `other`;
+         retorna una referència al p.i. per paràmetre. */
+		ParFreq& operator=(const ParFreq& other);
 };
-
 #endif
-

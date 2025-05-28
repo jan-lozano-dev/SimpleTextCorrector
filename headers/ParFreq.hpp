@@ -1,8 +1,8 @@
-
 #ifndef PARFREQ_HPP
 #define PARFREQ_HPP
 #include <string>
 #include <utility>
+
 using namespace std;
 
 class ParFreq {
@@ -24,7 +24,7 @@ class ParFreq {
 	  	ParFreq();
 
 		/* Pre: Cert */
-    		/* Post: el paràmetre implícit és una copia profunda de la ParFreq donada com a paràmetre. */	
+    	/* Post: el paràmetre implícit és una copia profunda de la ParFreq donada com a paràmetre. */	
 		ParFreq(const ParFreq &pf);
 		
 		/* Pre: Cert */
@@ -73,5 +73,14 @@ class ParFreq {
 		és més petita a la paraula del parell rebut per paràmetre */ 	
 		bool operator<(const ParFreq& pf) const;
 
+		/* Pre:  Cert  */
+		/* Post: El resultat indica si la paraula del paràmetre implícit
+		és més gran a la paraula del parell rebut per paràmetre */
+		bool operator>(const ParFreq& other) const;
+
+		/* Pre:  Cert  */
+		/* Post: El  p.i. té ara la mateixa paraula i freqüència que el paràmetre `other`;
+         retorna una referència al p.i. per paràmetre. */
+		ParFreq& operator=(const ParFreq& other);
 };
 #endif

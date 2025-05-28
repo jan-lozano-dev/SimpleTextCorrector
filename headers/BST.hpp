@@ -1,4 +1,3 @@
-
 #ifndef BST_HPP
 #define BST_HPP
 #include <iostream>
@@ -89,4 +88,5 @@ class BST  {
 		   element buit */
 		pair<bool, T> find(const T& d) const;
 };
+
 #endif

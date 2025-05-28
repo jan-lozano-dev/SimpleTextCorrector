@@ -16,11 +16,16 @@ This program processes a text file and automatically corrects spelling mistakes.
   - Transposition
 - Prioritizes corrections by **word frequency**.
 - Maintains **original punctuation** and word positions.
-- Generates a log of **all corrections** made.
+- Generates a log of **all corrections** made. (.reg file)
 
 ## 📁 Project Structure
-(-)
-
+- Headers include:
+    - BST (Binary Search Tree) with insert and find optimized recursive functions.
+    - ParFreq data type. A pair that contains a string and a frequency. Example: apple 100.
+    - Diccionari: object structured as a BST of ParFreq, which contains words and their
+      respective frequencies gotten from diccionari.txt file.
+    - Corrector: Does checks on input file, changes the text to correct spelling, and creates
+      register file with all changes made to the .inp file.
 
 ## 📥 Input Files
 1. **Dictionary file** (`diccionari.txt`):  
@@ -30,12 +35,9 @@ This program processes a text file and automatically corrects spelling mistakes.
    programming 45
    the 1000
 
-2. **Text file** (`input.txt`):  
-Format: ASCII, lowercase only, with basic punctuation.  
-Example:
-
-
+2. **Text file** (`input.txt`)
+   
 ## 📤 Output Files
-1. **Corrected text file** (`output.txt`):  
-
+1. **Corrected text file** (`output.txt`)
+2. **Register File** (`sample1.reg`)
 
